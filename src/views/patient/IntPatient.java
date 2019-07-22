@@ -5,19 +5,88 @@
  */
 package views.patient;
 
+import controller.PatientController;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Entity.PatientEntity;
+
 /**
  *
  * @author codexhaq
  */
 public class IntPatient extends javax.swing.JInternalFrame {
-
+    
+    PatientController patientControl;
     /**
      * Creates new form NewJInternalFrame
      */
     public IntPatient() {
         initComponents();
+        patientControl = new PatientController(this);
+        showPatient();
+        textBoxDisabled();
+    }
+    
+    public void textBoxDisabled(){
+        txtID.setText("");
+        txtNamaPasien.setText("");
+        txtNoIdentitas.setText("");
+        txtAlamat.setText("");
+        dtcBirthDate.setCalendar(null);
+        txtEmail.setText("");
+        
+        txtID.setEnabled(false);
+        txtNamaPasien.setEnabled(false);
+        txtNoIdentitas.setEnabled(false);
+        txtAlamat.setEnabled(false);
+        txtEmail.setEnabled(false);
+        
+        btnSave.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnMedicalRecord.setEnabled(false);
+    }
+    
+    public void textBoxEnabled(){
+        txtNamaPasien.enable();
+        txtNoIdentitas.enable();
+        txtAlamat.enable();
+        txtEmail.enable();
+        
+        btnSave.setEnabled(true);
+        btnDelete.setEnabled(true);
+        btnMedicalRecord.setEnabled(true);
     }
 
+    public void showPatient() {
+        try {
+            ArrayList<PatientEntity> list = patientControl.readAll();
+            DefaultTableModel model = (DefaultTableModel)patientTable.getModel();
+            model.setRowCount(0);
+            Object[] row = new Object[6];
+            for(int i = 0; i < list.size(); i++){
+                row[0] = list.get(i).getId();
+                row[1] = list.get(i).getName();
+                row[2] = list.get(i).getAddress();
+                row[3] = list.get(i).getIdNumber();
+                row[4] = list.get(i).getBirth_date();
+                row[5] = list.get(i).getEmail();
+                model.addRow(row);
+            }
+            
+            textBoxDisabled();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,11 +100,10 @@ public class IntPatient extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        patientTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
@@ -44,13 +112,11 @@ public class IntPatient extends javax.swing.JInternalFrame {
         txtAlamat = new javax.swing.JTextArea();
         txtEmail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        txtNoIdentitas1 = new javax.swing.JTextField();
-        rdbPerempuan = new javax.swing.JRadioButton();
-        rdbLaki = new javax.swing.JRadioButton();
-        btnEdit = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtNoIdentitas = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        dtcBirthDate = new com.toedter.calendar.JDateChooser();
         btnMedicalRecord = new javax.swing.JButton();
-        btnSave1 = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnAddPatient = new javax.swing.JButton();
 
         PatientForm.setBackground(new java.awt.Color(0, 153, 153));
@@ -80,21 +146,20 @@ public class IntPatient extends javax.swing.JInternalFrame {
 
         PatientForm.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 40));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        patientTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID Patient", "Nama Pasien", "Alamat", "No. Identitas", "Tanggal Lahir", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        patientTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(patientTable);
 
         PatientForm.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 700, 150));
 
@@ -109,10 +174,6 @@ public class IntPatient extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         jLabel5.setText("Alamat");
         PatientForm.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jLabel6.setText("Jenis Kelamin");
-        PatientForm.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         jLabel8.setText("Email");
@@ -151,36 +212,29 @@ public class IntPatient extends javax.swing.JInternalFrame {
         jLabel12.setText("No. Identitas");
         PatientForm.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
 
-        txtNoIdentitas1.setBackground(new java.awt.Color(204, 204, 255));
-        txtNoIdentitas1.setBorder(null);
-        PatientForm.add(txtNoIdentitas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 190, 30));
+        txtNoIdentitas.setBackground(new java.awt.Color(204, 204, 255));
+        txtNoIdentitas.setBorder(null);
+        PatientForm.add(txtNoIdentitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 430, 190, 30));
 
-        rdbPerempuan.setBackground(new java.awt.Color(204, 204, 255));
-        rdbPerempuan.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        rdbPerempuan.setText("Perempuan");
-        rdbPerempuan.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdbPerempuanActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
-        PatientForm.add(rdbPerempuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, -1, 30));
-
-        rdbLaki.setBackground(new java.awt.Color(204, 204, 255));
-        rdbLaki.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        rdbLaki.setText("Laki - Laki");
-        rdbLaki.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        PatientForm.add(rdbLaki, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, -1, 30));
-
-        btnEdit.setText("Edit");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-        PatientForm.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 80, 30));
-        PatientForm.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 190, -1));
+        PatientForm.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 410, 80, 30));
+        PatientForm.add(dtcBirthDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 190, -1));
 
         btnMedicalRecord.setText("Medical Record");
+        btnMedicalRecord.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+                btnMedicalRecordAncestorRemoved(evt);
+            }
+        });
         btnMedicalRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMedicalRecordActionPerformed(evt);
@@ -188,13 +242,13 @@ public class IntPatient extends javax.swing.JInternalFrame {
         });
         PatientForm.add(btnMedicalRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 170, 30));
 
-        btnSave1.setText("Save");
-        btnSave1.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSave1ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-        PatientForm.add(btnSave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 80, 30));
+        PatientForm.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 80, 30));
 
         btnAddPatient.setText("Add Patient Data");
         btnAddPatient.addActionListener(new java.awt.event.ActionListener() {
@@ -227,56 +281,111 @@ public class IntPatient extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
-    private void rdbPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbPerempuanActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rdbPerempuanActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditActionPerformed
+        boolean hasil = patientControl.deletePatient(Integer.parseInt(txtID.getText()));
+        if(hasil){
+            JOptionPane.showMessageDialog(null,"Data Berhasil dihapus");
+            showPatient();
+        }else{
+            JOptionPane.showMessageDialog(null,"Data Gagal dihapus");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnMedicalRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicalRecordActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            PatientEntity data = patientControl.getOnePatient(txtID.getText());
+//            MedicalHistoryPatient medicalView = new MedicalHistoryPatient(data);
+//            medicalView.setDefaultCloseOperation(PatientRegister.DO_NOTHING_ON_CLOSE);
+//            medicalView.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(IntPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnMedicalRecordActionPerformed
 
-    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSave1ActionPerformed
+        String birthDate = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        birthDate = sdf.format(dtcBirthDate.getDate());
+        
+        System.out.println(txtNoIdentitas.getText());
+        boolean hasil = patientControl.updatePatient(
+                Integer.parseInt(txtID.getText()), 
+                txtNamaPasien.getText(),
+                txtAlamat.getText(),
+                txtNoIdentitas.getText(),
+                birthDate,
+                txtEmail.getText()
+                );
+        if(hasil){
+            JOptionPane.showMessageDialog(null,"Data Berhasil diubah");
+            showPatient();
+        }else{
+            JOptionPane.showMessageDialog(null,"Data Gagal diubah");
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnAddPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientActionPerformed
         // TODO add your handling code here:
-        PatientRegister formRegister = new PatientRegister();
+        PatientRegister formRegister = new PatientRegister(this);
         formRegister.setResizable(false);
         formRegister.setDefaultCloseOperation(PatientRegister.DO_NOTHING_ON_CLOSE);
         formRegister.setVisible(true);
     }//GEN-LAST:event_btnAddPatientActionPerformed
 
+    private void patientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientTableMouseClicked
+        // TODO add your handling code here:
+        try {
+            int row = patientTable.getSelectedRow();
+            String table_click = patientTable.getModel().getValueAt(row, 0).toString();
+            PatientEntity data = patientControl.getOnePatient(table_click);
+            txtID.setText(String.valueOf(data.getId()));
+            txtNamaPasien.setText(data.getName());
+            txtAlamat.setText(data.getAddress());
+            txtNoIdentitas.setText(data.getIdNumber());
+            txtEmail.setText(data.getEmail());
+            Date sdf = new SimpleDateFormat("yyyy-MM-dd").parse(data.getBirth_date());
+            dtcBirthDate.setDate(sdf);
+            textBoxEnabled();
+            
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } catch (ParseException ex) {
+            Logger.getLogger(IntPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_patientTableMouseClicked
+
+    private void btnMedicalRecordAncestorRemoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_btnMedicalRecordAncestorRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMedicalRecordAncestorRemoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PatientForm;
     private javax.swing.JButton btnAddPatient;
-    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnMedicalRecord;
-    private javax.swing.JButton btnSave1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JButton btnSave;
+    private com.toedter.calendar.JDateChooser dtcBirthDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JRadioButton rdbLaki;
-    private javax.swing.JRadioButton rdbPerempuan;
+    private javax.swing.JTable patientTable;
     private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNamaPasien;
-    private javax.swing.JTextField txtNoIdentitas1;
+    private javax.swing.JTextField txtNoIdentitas;
     // End of variables declaration//GEN-END:variables
 }

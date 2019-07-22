@@ -7,6 +7,11 @@ package model;
 
 import connection.DatabaseConnection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import model.Entity.PatientEntity;
 
 /**
  *
@@ -90,8 +95,63 @@ public class PatientModel {
         return hasil;
     }
     
-    public boolean getAllPatient(){
+    public ArrayList<PatientEntity> getAllPatient() throws Exception{
         query = "SELECT * FROM patients";
+        hasil = dbConn.executeQuery(query, true);
+        ArrayList<PatientEntity> record = new ArrayList<PatientEntity>();
+        if(hasil){
+            rsPatient = dbConn.getRs();
+            while(rsPatient.next()){
+                PatientEntity patient = new PatientEntity();
+                patient.setId(rsPatient.getInt("id"));
+                patient.setName(rsPatient.getString("patient_name"));
+                patient.setAddress(rsPatient.getString("address"));
+                patient.setIdNumber(rsPatient.getString("identity_id"));
+                patient.setBirth_date(rsPatient.getString("birth_date"));
+                patient.setEmail(rsPatient.getString("email"));
+                record.add(patient);
+            }
+        }
+        return record;
+    }
+    
+    /**
+     *
+     * @param id
+     * @throws SQLException
+     */
+    public PatientEntity getOnePatient(String id) throws SQLException{
+        query = "SELECT * FROM patients where id='"+id+"'";
+        hasil = dbConn.executeQuery(query, true);
+        PatientEntity patient = new PatientEntity();
+        if(hasil){
+            rsPatient = dbConn.getRs();
+            rsPatient.next();
+            
+            patient.setId(rsPatient.getInt("id"));
+            patient.setName(rsPatient.getString("patient_name"));
+            patient.setAddress(rsPatient.getString("address"));
+            patient.setIdNumber(rsPatient.getString("identity_id"));
+            patient.setBirth_date(rsPatient.getString("birth_date"));
+            patient.setEmail(rsPatient.getString("email"));
+        }
+        
+        return patient;
+    }
+    
+    public boolean updatePatient(){
+        query = "UPDATE patients SET patient_name='"+fullName+"', "
+                + "address='"+address+"',"
+                + "identity_id='"+identityId+"',"
+                + "birth_date='"+birthDate+"',"
+                + "email='"+email+"'"
+                + "WHERE id='"+id+"'";
+        hasil = dbConn.executeQuery(query, false);
+        return hasil;
+    }
+    
+    public boolean deletePatient(){
+        query = "DELETE FROM patients WHERE id='"+id+"'";
         hasil = dbConn.executeQuery(query, false);
         return hasil;
     }

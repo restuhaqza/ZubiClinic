@@ -3,38 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.patient;
+package views.doctor;
 
-import controller.PatientController;
+import controller.DoctorController;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author codexhaq
+ * @author Fayami
  */
-public class PatientRegister extends javax.swing.JFrame {
-
-    
-    PatientController patientControl;
-    IntPatient FrmPatient;
+public class DoctorRegister extends javax.swing.JFrame {
+    DoctorController doctorControl;
+    IntDoctor viewDoctor;
     /**
-     * Creates new form PatientRegister
+     * Creates new form DoctorRegister
      */
-    public PatientRegister() {
+    public DoctorRegister() {
         initComponents();
-        patientControl = new PatientController(this);
+        doctorControl = new DoctorController(this);
     }
     
-    /**
-     * Creates new form PatientRegister
-     * @param view
-     */
-    public PatientRegister(IntPatient view) {
+    public DoctorRegister(IntDoctor view){
         initComponents();
-        this.FrmPatient = view;
-        patientControl = new PatientController(this);
+        doctorControl = new DoctorController(this);
+        this.viewDoctor = view;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,10 +40,8 @@ public class PatientRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        genderGroup = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         PExit = new javax.swing.JPanel();
@@ -66,8 +59,7 @@ public class PatientRegister extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        dtcBirthDate = new com.toedter.calendar.JDateChooser();
-        txtIdNumber = new javax.swing.JTextField();
+        txtPhone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         txtAddress = new javax.swing.JTextField();
@@ -80,17 +72,12 @@ public class PatientRegister extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Registration Member");
+        jLabel1.setText("Registration Doctor");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel4.setText("Birth");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 240, 10));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 240, 10));
 
         jSeparator2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 240, 10));
@@ -168,7 +155,7 @@ public class PatientRegister extends javax.swing.JFrame {
         txtFullName.setBackground(new java.awt.Color(51, 51, 51));
         txtFullName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtFullName.setForeground(new java.awt.Color(255, 255, 255));
-        txtFullName.setText("Enter yourname");
+        txtFullName.setText("Enter name");
         txtFullName.setBorder(null);
         txtFullName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -180,24 +167,24 @@ public class PatientRegister extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Email");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel7.setText("Name");
+        jLabel7.setText("Name Doctor");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
         txtEmail.setBackground(new java.awt.Color(51, 51, 51));
         txtEmail.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(255, 255, 255));
-        txtEmail.setText("Enter your eamail");
+        txtEmail.setText("Enter email");
         txtEmail.setBorder(null);
         txtEmail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtEmailMouseClicked(evt);
             }
         });
-        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 240, 30));
+        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, 30));
 
         jTextField3.setBackground(new java.awt.Color(51, 51, 51));
         jTextField3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -210,33 +197,32 @@ public class PatientRegister extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 240, 30));
-        jPanel3.add(dtcBirthDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 240, -1));
 
-        txtIdNumber.setBackground(new java.awt.Color(51, 51, 51));
-        txtIdNumber.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtIdNumber.setForeground(new java.awt.Color(255, 255, 255));
-        txtIdNumber.setText("Enter your ID Identity");
-        txtIdNumber.setBorder(null);
-        txtIdNumber.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtPhone.setBackground(new java.awt.Color(51, 51, 51));
+        txtPhone.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtPhone.setForeground(new java.awt.Color(255, 255, 255));
+        txtPhone.setText("Enter Number Phone");
+        txtPhone.setBorder(null);
+        txtPhone.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtIdNumberMouseClicked(evt);
+                txtPhoneMouseClicked(evt);
             }
         });
-        jPanel3.add(txtIdNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 240, 30));
+        jPanel3.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 240, 30));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel6.setText("ID Identity");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, -1));
+        jLabel6.setText("Phone");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, -1, -1));
 
         jSeparator3.setBackground(new java.awt.Color(204, 204, 204));
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 240, 10));
+        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 240, 10));
 
         txtAddress.setBackground(new java.awt.Color(51, 51, 51));
         txtAddress.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtAddress.setForeground(new java.awt.Color(255, 255, 255));
-        txtAddress.setText("Enter Your Address");
+        txtAddress.setText("Enter Address");
         txtAddress.setBorder(null);
         txtAddress.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -248,18 +234,18 @@ public class PatientRegister extends javax.swing.JFrame {
                 txtAddressActionPerformed(evt);
             }
         });
-        jPanel3.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 240, 70));
+        jPanel3.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 240, 70));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Address");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGap(0, 420, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,7 +254,7 @@ public class PatientRegister extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 569, Short.MAX_VALUE)
+            .addGap(0, 567, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -281,39 +267,30 @@ public class PatientRegister extends javax.swing.JFrame {
 
     private void BtnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnExitMouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_BtnExitMouseClicked
+
+    private void PExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PExitMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_PExitMouseClicked
 
     private void PSignUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PSignUpMouseClicked
         // TODO add your handling code here:\
         String birthDate = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        birthDate = sdf.format(dtcBirthDate.getDate());
 
-        System.out.println(txtFullName.getText());
-        System.out.println(txtAddress.getText());
-        System.out.println(txtIdNumber.getText());
-        System.out.println(birthDate);
-        System.out.println(txtEmail.getText());
-        boolean hasil = patientControl.insertPatient(
-                txtFullName.getText(),
-                txtAddress.getText(), 
-                txtIdNumber.getText(), 
-                birthDate, 
-                txtEmail.getText()
-        );
-        
+        boolean hasil = doctorControl.insertDoctor(txtFullName.getText(), txtPhone.getText(), txtAddress.getText(), txtEmail.getText());
+
         if(hasil){
             System.out.println("Data Disimpan");
             JOptionPane.showMessageDialog(null,"Data Berhasil disimpan");
-            this.FrmPatient.showPatient();
+            this.viewDoctor.getAllDoctor();
             this.dispose();
-            
         }else{
             System.out.println("Data Gagal disimpan");
             JOptionPane.showMessageDialog(null,"Maaf, Data gagal disimpan");
         }
-        
+
     }//GEN-LAST:event_PSignUpMouseClicked
 
     private void txtFullNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFullNameMouseClicked
@@ -330,15 +307,10 @@ public class PatientRegister extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3MouseClicked
 
-    private void PExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PExitMouseClicked
+    private void txtPhoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhoneMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_PExitMouseClicked
-
-    private void txtIdNumberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdNumberMouseClicked
-        // TODO add your handling code here:
-        txtIdNumber.setText("");
-    }//GEN-LAST:event_txtIdNumberMouseClicked
+        txtPhone.setText("");
+    }//GEN-LAST:event_txtPhoneMouseClicked
 
     private void txtAddressMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAddressMouseClicked
         // TODO add your handling code here:
@@ -347,7 +319,6 @@ public class PatientRegister extends javax.swing.JFrame {
 
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtAddressActionPerformed
 
     /**
@@ -367,20 +338,20 @@ public class PatientRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PatientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoctorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PatientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoctorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PatientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoctorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PatientRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DoctorRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PatientRegister().setVisible(true);
+                new DoctorRegister().setVisible(true);
             }
         });
     }
@@ -390,13 +361,10 @@ public class PatientRegister extends javax.swing.JFrame {
     private javax.swing.JLabel BtnLogin;
     private javax.swing.JPanel PExit;
     private javax.swing.JPanel PSignUp;
-    private com.toedter.calendar.JDateChooser dtcBirthDate;
-    private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -412,6 +380,6 @@ public class PatientRegister extends javax.swing.JFrame {
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFullName;
-    private javax.swing.JTextField txtIdNumber;
+    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

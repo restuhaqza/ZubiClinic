@@ -5,6 +5,9 @@
  */
 package views;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import views.doctor.IntDoctor;
 import views.patient.IntPatient;
 
 /**
@@ -13,12 +16,15 @@ import views.patient.IntPatient;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    IntPatient patientFrm = new IntPatient();
+    IntPatient patientFrm;
+    IntDoctor doctorFrm;
     
     /**
      * Creates new form MainMenu
      */
-    public MainMenu() {
+    public MainMenu() throws Exception {
+        this.patientFrm = new IntPatient();
+        this.doctorFrm = new IntDoctor();
         initComponents();
     }
 
@@ -41,7 +47,7 @@ public class MainMenu extends javax.swing.JFrame {
         btnAppointment = new java.awt.Button();
         button5 = new java.awt.Button();
         button6 = new java.awt.Button();
-        button7 = new java.awt.Button();
+        btnDoctor = new java.awt.Button();
         button8 = new java.awt.Button();
         mainPanel = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
@@ -85,7 +91,12 @@ public class MainMenu extends javax.swing.JFrame {
 
         button6.setLabel("Room");
 
-        button7.setLabel("Doctor");
+        btnDoctor.setLabel("Doctor");
+        btnDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoctorActionPerformed(evt);
+            }
+        });
 
         button8.setLabel("Service");
 
@@ -104,7 +115,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +142,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,8 +247,14 @@ public class MainMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cleanDesktopPane(){
+        patientFrm.setVisible(false);
+        doctorFrm.setVisible(false);
+    }
+    
     private void btnPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientActionPerformed
         // TODO add your handling code here:
+        cleanDesktopPane();
         DesktopMain.add(patientFrm);
         patientFrm.setVisible(true);
         
@@ -246,6 +263,13 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentActionPerformed
       
     }//GEN-LAST:event_btnAppointmentActionPerformed
+
+    private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctorActionPerformed
+        // TODO add your handling code here:
+        cleanDesktopPane();
+        DesktopMain.add(doctorFrm);
+        doctorFrm.setVisible(true);
+    }//GEN-LAST:event_btnDoctorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,7 +302,11 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                try {
+                    new MainMenu().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -287,12 +315,12 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane DesktopMain;
     private javax.swing.JPanel bodyPanel;
     private java.awt.Button btnAppointment;
+    private java.awt.Button btnDoctor;
     private java.awt.Button btnHome;
     private java.awt.Button btnPatient;
     private java.awt.Button button3;
     private java.awt.Button button5;
     private java.awt.Button button6;
-    private java.awt.Button button7;
     private java.awt.Button button8;
     private java.awt.Button button9;
     private javax.swing.JPanel homePanel;

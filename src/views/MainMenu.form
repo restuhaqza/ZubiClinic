@@ -105,7 +105,7 @@
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="button8" min="-2" pref="169" max="-2" attributes="0"/>
-                                  <Component id="button7" min="-2" pref="169" max="-2" attributes="0"/>
+                                  <Component id="btnDoctor" min="-2" pref="169" max="-2" attributes="0"/>
                                   <Component id="button6" min="-2" pref="169" max="-2" attributes="0"/>
                                   <Component id="button5" min="-2" pref="169" max="-2" attributes="0"/>
                                   <Component id="btnHome" min="-2" pref="169" max="-2" attributes="0"/>
@@ -137,7 +137,7 @@
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="button6" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="button7" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="btnDoctor" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="button8" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -202,10 +202,13 @@
                 <Property name="label" type="java.lang.String" value="Room"/>
               </Properties>
             </Component>
-            <Component class="java.awt.Button" name="button7">
+            <Component class="java.awt.Button" name="btnDoctor">
               <Properties>
                 <Property name="label" type="java.lang.String" value="Doctor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDoctorActionPerformed"/>
+              </Events>
             </Component>
             <Component class="java.awt.Button" name="button8">
               <Properties>

@@ -6,6 +6,8 @@
 package views;
 
 import controller.AdminController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -244,9 +246,15 @@ public class LoginPage extends javax.swing.JFrame {
         boolean hasil = adminControl.loginAdmin(txtUsername.getText(),
                 txtPassword.getText());
         if(hasil){
-            MainMenu home = new MainMenu();
-            home.setVisible(true);
-            this.dispose();
+            MainMenu home;
+            try {
+                home = new MainMenu();
+                home.setVisible(true);
+                this.dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }else{
             JOptionPane.showMessageDialog(null,"Maaf username/password salah");
             txtUsername.setText(null);

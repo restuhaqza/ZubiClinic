@@ -3,10 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/views/patient/IntPatient.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/model/DoctorModel.java</file>
             <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/controller/PatientController.java</file>
             <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/views/patient/PatientRegister.java</file>
-            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/views/Dashboard.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/controller/AdminController.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/views/MainMenu.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/connection/DatabaseConnection.java</file>
             <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/model/PatientModel.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/controller/DoctorController.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/model/RoomModel.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/views/LoginPage.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/controller/RoomController.java</file>
+            <file>file:/media/codexhaq/9E4A4BC74A4B9AC3/Users/CodeXHAQ%20Dev/Documents/ZubiClinic/ZubiClinic/src/views/Dashboard.java</file>
         </group>
     </open-files>
 </project-private>
